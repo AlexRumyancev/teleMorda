@@ -26,7 +26,6 @@ public class ServerUtilitesImpl implements ServerUtilites {
 
     @Override
     public boolean checkExistUser(MyUser user) {
-//        return ur.existByName(user.getMyName());
         return false;
     }
 }

@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends CrudRepository <MyUser, Long> {
-//    boolean existByName(String name);
 }
