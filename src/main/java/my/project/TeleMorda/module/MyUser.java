@@ -1,18 +1,23 @@
 package my.project.TeleMorda.module;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
+//@Table(name = "users")
 public class MyUser {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     private String myLogin;
 
     private String myName;
+
+    private String password;
+
+    private String token;
 
     private Timestamp lastGetList;
 
@@ -20,10 +25,6 @@ public class MyUser {
 
     public Long getUserId() {
         return id;
-    }
-
-    public void setUserId(Long userId) {
-        this.id = userId;
     }
 
     public String getMyLogin() {
@@ -56,5 +57,21 @@ public class MyUser {
 
     public void setLastOnline(Timestamp lastOnline) {
         this.lastOnline = lastOnline;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
