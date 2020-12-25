@@ -10,5 +10,5 @@ import java.util.Optional;
 
 @Repository
 public interface MessageRepository extends CrudRepository<MyMessage, Long> {
-    Optional<List<MyMessage>> findAllByMyUser(MyUser user);
+    List<MyMessage> findAllByMyUser(MyUser user);
 }

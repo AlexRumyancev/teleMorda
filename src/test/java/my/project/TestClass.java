@@ -33,10 +33,8 @@ public class TestClass {
 
     @BeforeEach
     public void init() {
-        user1.setMyLogin("telesyn");
-        user1.setMyName("Alex");
+        user1.setMyName("telesyn");
         ur.save(user1);
-        user2.setMyLogin("tester");
         user2.setMyName("Test");
         ur.save(user2);
         mess1 = new MyMessage(user2, "testMessage");

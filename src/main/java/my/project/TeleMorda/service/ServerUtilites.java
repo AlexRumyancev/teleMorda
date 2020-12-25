@@ -10,4 +10,6 @@ public interface ServerUtilites {
 
     void send(Optional<MyUser> user, Optional<MyMessage> message);
     Optional<List<MyMessage>> recieve(Optional<MyUser> user);
+    boolean isOnline(String login);
+    void setOnline(String login);
 }
