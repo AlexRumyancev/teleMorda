@@ -19,7 +19,7 @@ public class MyUser {
 
     @NonNull
     @Column(unique=true)
-    private String myName;
+    private String login;
 
     private String password;
 
@@ -42,7 +42,7 @@ public class MyUser {
     private List<MyUser> contacts;
 
     public MyUser(String name, String password) {
-        this.myName = name;
+        this.login = name;
         this.password = password;
     }
 
@@ -59,7 +59,7 @@ public class MyUser {
     }
 
     public String getMyName() {
-        return myName;
+        return login;
     }
 
     public String getPassword() {
@@ -67,7 +67,7 @@ public class MyUser {
     }
 
     public void setMyName(String myName) {
-        this.myName = myName;
+        this.login = myName;
     }
 
     public Long getId() {
@@ -80,5 +80,9 @@ public class MyUser {
 
     public Timestamp getLastOnline() {
         return lastOnline;
+    }
+
+    public void setLastOnline(Timestamp lastOnline) {
+        this.lastOnline = lastOnline;
     }
 }

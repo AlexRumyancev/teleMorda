@@ -6,7 +6,6 @@ import my.project.TeleMorda.module.MyUser;
 import my.project.TeleMorda.repositories.UserRepository;
 import my.project.TeleMorda.service.ServerUtilites;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,13 +26,13 @@ public class ServerController {
 
     @GetMapping("/tm/login")
     public void doLogin(Principal principal) {
-        Optional<MyUser> user = ur.findByMyName(principal.getName());
+        Optional<MyUser> user = ur.findByLogin(principal.getName());
         su.setOnline(user.orElseThrow(UserNotFoundException::new).getMyName());
     }
 
     @GetMapping("/tm/contacts")
-    public List<Map<String, String>> getContacs() {
-        return null;
+    public List getContacs() {
+        return (List) ur.findAll();
     }
 
     @GetMapping("/tm/recieve")

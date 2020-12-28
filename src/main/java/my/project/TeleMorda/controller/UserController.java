@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.Timestamp;
 import java.util.UUID;
 
 @RestController
@@ -25,6 +26,7 @@ public class UserController {
         }
         MyUser saveUser = user;
         saveUser.setToken(result);
+        saveUser.setLastOnline(new Timestamp(System.currentTimeMillis()));
         try {
             ur.save(saveUser);
         } catch (Exception e) {

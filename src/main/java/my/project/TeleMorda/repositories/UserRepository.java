@@ -10,9 +10,9 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends CrudRepository <MyUser, Long> {
 
-    Optional<MyUser> findByMyName(String name);
+    Optional<MyUser> findByLogin(String login);
 
-    @Query(value = "SELECT u FROM MyUser u where u.myName = ?1 and u.password = ?2 ")
+    @Query(value = "SELECT u FROM MyUser u where u.login = ?1 and u.password = ?2 ")
     Optional<MyUser> login(String username,String password);
 
     Optional<MyUser> findByToken(String token);
