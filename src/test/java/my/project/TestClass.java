@@ -37,7 +37,7 @@ public class TestClass {
         ur.save(user1);
         user2.setMyName("Test");
         ur.save(user2);
-        mess1 = new MyMessage(user2, "testMessage");
+        mess1 = new MyMessage(user1, user2, "testMessage");
 
     }
 

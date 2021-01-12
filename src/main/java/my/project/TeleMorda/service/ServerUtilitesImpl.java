@@ -55,7 +55,7 @@ public class ServerUtilitesImpl implements ServerUtilites {
 
     @Override
     public Optional<List<MyMessage>> recieve(Optional<MyUser> user) {
-        return Optional.ofNullable(mr.findAllByMyUser(user.orElseThrow(UserNotFoundException::new)));
+        return Optional.ofNullable(mr.findAllByToUser(user.orElseThrow(UserNotFoundException::new)));
     }
 
     @Override

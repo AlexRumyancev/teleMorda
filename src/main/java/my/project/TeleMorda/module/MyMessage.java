@@ -3,6 +3,8 @@ package my.project.TeleMorda.module;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
 @Table(name = "queue_messages")
@@ -14,13 +16,23 @@ public class MyMessage {
 
     @NonNull
     @ManyToOne
-    private MyUser myUser;
+    private MyUser fromUser;
+
+    @NonNull
+    @ManyToOne
+    private MyUser toUser;
 
     private String text;
 
-    public MyMessage(MyUser user, String message) {
-        this.myUser = user;
+    @NonNull
+    @Column(unique=true)
+    private Timestamp created;
+
+    public MyMessage(MyUser fromUser, MyUser toUser, String message) {
+        this.fromUser = fromUser;
+        this.toUser = toUser;
         this.text = message;
+        this.created = new Timestamp(new Date().getTime());
     }
 
     public MyMessage() {
@@ -31,12 +43,14 @@ public class MyMessage {
         return id;
     }
 
-    public MyUser getMyUser() {
-        return myUser;
+    @NonNull
+    public MyUser getFromUser() {
+        return fromUser;
     }
 
-    public void setMyUser(MyUser myUser) {
-        this.myUser = myUser;
+    @NonNull
+    public MyUser getToUser() {
+        return toUser;
     }
 
     public String getText() {
@@ -45,5 +59,10 @@ public class MyMessage {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    @NonNull
+    public Timestamp getCreated() {
+        return created;
     }
 }
