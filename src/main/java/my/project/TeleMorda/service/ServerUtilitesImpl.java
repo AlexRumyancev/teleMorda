@@ -4,8 +4,8 @@ import my.project.TeleMorda.constants.Constants;
 import my.project.TeleMorda.exception.MessageIsNullException;
 import my.project.TeleMorda.exception.UserEmptyException;
 import my.project.TeleMorda.exception.UserNotFoundException;
-import my.project.TeleMorda.module.MyMessage;
-import my.project.TeleMorda.module.MyUser;
+import my.project.TeleMorda.modele.MyMessage;
+import my.project.TeleMorda.modele.MyUser;
 import my.project.TeleMorda.repositories.MessageRepository;
 import my.project.TeleMorda.repositories.UserRepository;
 import org.slf4j.Logger;
@@ -55,7 +55,7 @@ public class ServerUtilitesImpl implements ServerUtilites {
 
     @Override
     public Optional<List<MyMessage>> recieve(Optional<MyUser> user) {
-        return Optional.ofNullable(mr.findAllByToUser(user.orElseThrow(UserNotFoundException::new)));
+        return Optional.ofNullable(mr.findAllByFromUser(user.orElseThrow(UserNotFoundException::new)));
     }
 
     @Override

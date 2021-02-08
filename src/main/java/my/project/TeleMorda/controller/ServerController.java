@@ -1,24 +1,23 @@
 package my.project.TeleMorda.controller;
 
-import my.project.TeleMorda.constants.Constants;
 import my.project.TeleMorda.exception.MessageIsNullException;
 import my.project.TeleMorda.exception.UserNotFoundException;
-import my.project.TeleMorda.module.MyMessage;
-import my.project.TeleMorda.module.MyUser;
+import my.project.TeleMorda.modele.MyMessage;
+import my.project.TeleMorda.modele.MyUser;
 import my.project.TeleMorda.repositories.MessageRepository;
 import my.project.TeleMorda.repositories.UserRepository;
 import my.project.TeleMorda.service.ServerUtilites;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
-//@CrossOrigin("*")
 public class ServerController {
 
     @Autowired
@@ -36,37 +35,18 @@ public class ServerController {
         su.setOnline(user.orElseThrow(UserNotFoundException::new).getMyName());
     }
 
-    @GetMapping("/tm/time")
-    public Integer getRefreshTime() {
-        return Constants.ONLINE_REFRESH;
-    }
-
     @GetMapping("/tm/contacts")
-    public List<Map<String, Object>> getContacs(Principal principal) {
-        List<Map<String, Object>> result = new ArrayList<>();
-        for(MyUser user: ur.findAll()) {
-            if (!user.getMyName().equals(principal.getName())) {
-                Map<String, Object> resUser = new HashMap<>();
-                resUser.put("login", user.getMyName());
-                resUser.put("online", (System.currentTimeMillis() - user.getLastOnline().getTime()) > Constants.DELAY_ONLINE_REFRESH);
-                result.add(resUser);
-            }
-        }
-        return result ;
+    public List getContacs() {
+        return (List) ur.findAll();
     }
 
     @GetMapping("/tm/recieve")
-    public List<Map<String, Object>> getMessages(Principal principal) {
+    public List<MyMessage> getMessages(Principal principal) {
         Optional<MyUser> user = ur.findByLogin(principal.getName());
-        List<Map<String, Object>> result = new ArrayList<>();
-        for(MyMessage message: mr.findAllByToUser(user.orElseThrow(UserNotFoundException::new))) {
-            Map<String, Object> resMes = new HashMap<>();
-            resMes.put("from", message.getFromUser().getMyName());
-            resMes.put("message", message.getText());
-            resMes.put("created", message.getCreated());
-            result.add(resMes);
-        }
-        return result ;
+        List<MyMessage> list = new ArrayList<>();
+//        list = mr.findAllByFromMyUser(user.orElseThrow(UserNotFoundException::new));
+        list.forEach((x) -> mr.delete(x));
+        return list;
     }
 
     @PostMapping("/tm/send")

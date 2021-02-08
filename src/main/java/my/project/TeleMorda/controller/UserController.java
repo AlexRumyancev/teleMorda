@@ -1,16 +1,18 @@
 package my.project.TeleMorda.controller;
 
-import my.project.TeleMorda.module.MyUser;
+import my.project.TeleMorda.modele.MyUser;
 import my.project.TeleMorda.repositories.UserRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.Timestamp;
 import java.util.UUID;
 
 @RestController
-//@CrossOrigin("*")
 public class UserController {
 
     @Autowired
@@ -35,7 +37,7 @@ public class UserController {
 
     @PostMapping("/admin/token")
     public String getToken(@RequestParam("username") final String username, @RequestParam("password") final String password){
-        String token = ur.login(username,password).map((x) -> x.getToken()).get();
+    String token = ur.login(username,password).map(MyUser::getToken).get();
         if(StringUtils.isEmpty(token)){
             return "no token found";
         }

@@ -1,4 +1,4 @@
-package my.project.TeleMorda.module;
+package my.project.TeleMorda.modele;
 
 import org.springframework.lang.NonNull;
 

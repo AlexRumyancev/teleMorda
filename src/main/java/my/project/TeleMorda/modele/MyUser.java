@@ -1,16 +1,13 @@
-package my.project.TeleMorda.module;
+package my.project.TeleMorda.modele;
 
 import org.springframework.lang.NonNull;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
-//@Table(name = "users")
+@Table(name = "users")
 public class MyUser {
 
     @Id

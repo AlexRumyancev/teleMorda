@@ -1,6 +1,6 @@
 package my.project.TeleMorda.service;
 
-import my.project.TeleMorda.module.MyUser;
+import my.project.TeleMorda.modele.MyUser;
 import my.project.TeleMorda.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
